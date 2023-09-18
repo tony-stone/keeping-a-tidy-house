@@ -1,0 +1,239 @@
+---
+title: "Keeping a Tidy House"
+subtitle: "ECHILD: Structuring your project and code"
+author: "Tony Stone"
+date: 2023-09-21
+date-format: "D MMM YYYY"
+format: 
+  revealjs:
+    logo: imgs/logo.png
+    theme: solarized
+---
+
+## The [ONS Duck Book](https://best-practice-and-impact.github.io/qa-of-code-guidance) - search for "ONS Duck" {.smaller}
+
+<center><img src="imgs/not-my-duck.jpg" alt="&quot;That's not my duck&quot; book example page" width="30%" /></center>
+
+* Based on the principles in the [UK Gov's Analytical Quality Assurance ("Aqua") 
+  book](https://www.gov.uk/government/publications/the-aqua-book-guidance-on-producing-quality-analysis-for-government)
+
+    + Arose from the _Review of quality assurance of government analytical 
+    models_ after the InterCity West Coast franchise competition in 2012
+
+    + Seeks to ensure appropriate __quality assurance__ of models used by 
+    government: their inputs, methodology and outputs
+
+* Long title: QUality Assurance of Code for Analysis and Research 
+  (QUACAR [/kwakə/](http://ipa-reader.xyz/?text=kwak%C9%99&voice=Brian))
+    + UK Civil Service Analysis Function guidance
+    + Produced by the Analytical Standards and Pipelines (ASaP) hub within the 
+      Office for National Statistics (ONS).
+      
+* And you thought initialisms and acronyms in academia were contrived...
+
+::: {.notes}
+Any guesses for the blank in the picture? Fuzzy, apparently.
+:::
+
+
+## Principles {background-color="#e3fdf6"}
+
+* Reproducible
+* Auditable
+* Assured
+* Reproducible analytical pipelines
+
+
+## Reproducible {background-color="#e3fdf6"}
+
+> If you can’t prove that you can run the same analysis, with the same data, 
+and obtain the same results then you are not adding a valuable analysis
+
+With a repeatable, transparent production process we can:
+
+* Focus on verifying that the analysis is sensible (rather than worry about the 
+code)
+* Reuse and build on the methods
+
+Requires good __documentation__, not simply code in a repo.
+
+
+## Auditable {background-color="#e3fdf6"}
+
++ Transparency can help to increase trustworthiness
++ More 👀 = 
+tips and increased identification of flaws =
+__improved analyses__
++ Document design decisions:
+    + Who?
+    + When? 
+    + What evidence?
+    
+Requires good __documentation__.
+
+
+## Assured {background-color="#e3fdf6"}
+
+> Quality assurance is time-consuming and resource-intensive
+
+* Quality assure code and outputs proportionately
+
+* _Some_ assurance processes can be automated, e.g.
+
+  _does your code run_
+  
+* ...But not all, e.g.
+
+  _does your code do what you think it does_ 
+  <small>(though automation can help here)</small>
+
+__Document__ any quality assurance processes or their absence.
+
+
+## Reproducible analytical pipelines (RAP) {background-color="#e3fdf6"}
+
+This is most helpful when conducting the same analysis routinely 
+(e.g. official statistic).
+
+Less helpful in research when generally developing new, one-time analyses.
+
+However, both should adopt a modular design: 
+
+> break complex logic down into small, understandable chunks that can be 
+__documented__ and tested more easily.
+
+
+## Structuring your project {background-color="#f6e3fd"}
+
+* Good directory structure
+* Consistent file and directory name conventions
+* Organise analysis as a Directed Acyclic Graph 
+* Preserve input data
+* Check outputs are disposable
+* Modular design
+
+
+## Directory structure {background-color="#f6e3fd"}
+
+> Good directory structure and file hygiene goes a long way...
+
+Logical segregation of projects and analytical tasks
+
++ HOPE-study
+    * WP1.1-cohort-development
+    * WP1.2-phenotypes
++ ECHILD-linkage-evaluation
+    * 01-linkage-by-birth-cohort
+    * 02-linkage-by-npd-module
+
+
+## Good file and directory name conventions {background-color="#f6e3fd"}
+
+* Consistency, above all else
+* Short but descriptive and human readable names
+* No spaces, for machine readability - underscores (_) or dashes (-) are 
+  preferred
+* Use of consistent ISO date formatting (i.e. YYYY-MM-DD)
+* Padding the left side of numbers with zeros to maintain order
+
+  e.g. 01 instead of 1. So 10 appears after 09 rather than before 2.
+
+
+## Organise analysis as a Directed Acyclic Graph {background-color="#f6e3fd"}
+
+:::: {.columns}
+::: {.column width="75%"}
+
+> A DAG is for life, not just for causal inference.
+> 
+> --_(Euler, 1736)^[Not really.]_
+
+Visualise relationships between tasks:
+
+* dependencies
+* dependents
+
+:::
+
+::: {.column width="25%"}
+```{dot}
+//| fig-width: 2
+
+digraph Dataflow {
+  rankdir="TB";
+	labelloc = t;
+	fontname = "Helvetica,Arial,sans-serif";
+	bgcolor = "transparent";
+  node [shape = circle, style = filled, fillcolor = Linen];
+  input [label = "Ingest data", fillcolor = lightgreen];
+  d [label = "d", fillcolor = lightblue];
+  a [label = "a"]
+  b [label = "b"]
+  c [label = "c"]
+
+  input -> {a b d}
+  {a b} -> c
+  b -> d
+  c -> d
+
+}
+
+```
+:::
+::::
+
+## Preserve input data {background-color="#f6e3fd"}
+
+* Input data - the starting point of an analysis - should be read-only
+* Data cleaning often incorporates many design decisions and forms part of your 
+  analysis
+
+
+## Check outputs are disposable {background-color="#f6e3fd"}
+
+* You should be able to dispose of your outputs without worrying^[Okay, long 
+  running tasks are problematic. We need to resolve this.]
+* If not, it is unlikely you have confidence in being able to reproduce your 
+  results
+* It is good practice to delete and regenerate your outputs frequently when 
+  developing an analysis^[See above]
+  
+  
+## Code documentation {.smaller}
+
+> Documentation is a love letter that you write to your future self.
+> 
+> --_Damian Conway_
+
+* Focus on readable, modular code
+* Use [docstrings](https://best-practice-and-impact.github.io/qa-of-code-guidance/code_documentation.html#docstrings) 
+  for modules, functions, classes, and methods
+
+* Use with purpose:
+    * For non-obvious details
+    * How and why code has been written in a particular way
+    
+* But sparingly:
+    * Avoid redundancy
+    * Burden of maintaining _code-comment agreement_
+
+## Project documentation {.smaller}
+
+> __Documenting__ your project will makes it much easier for others to understand 
+  your goal and ways of working
+  
+* README
+* HOW TO (get the code to run)
+* Dependencies
+* Citation
+* Vignettes
+* Versioning
+* Changelog
+* Copyright and Licenses
+
+## TL;DR
+
+::: {.r-fit-text}
+__WRITE A README__
+:::
+_You'll thank yourself later_
