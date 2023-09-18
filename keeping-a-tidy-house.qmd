@@ -228,8 +228,8 @@ digraph Dataflow {
 * Citation
 * Vignettes
 * Versioning
-* Changelog
-* Copyright and Licenses
+* Change log
+* Copyright and License
 
 ## TL;DR
 
