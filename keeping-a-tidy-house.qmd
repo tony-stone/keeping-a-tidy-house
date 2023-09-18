@@ -151,7 +151,7 @@ Logical segregation of projects and analytical tasks
 Visualise relationships between tasks:
 
 * dependencies
-* dependents
+* dependants
 
 :::
 
