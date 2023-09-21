@@ -387,7 +387,7 @@ Tony Stone
 </blockquote>
 <p>With a repeatable, transparent production process we can:</p>
 <ul>
-<li>Focus on verifying that the analysis is sensible (rather than worry about the code)</li>
+<li>Focus on verifying that the analysis is sensible (rather than worry about whether the code runs)</li>
 <li>Reuse and build on the methods</li>
 </ul>
 <p>Requires good <strong>documentation</strong>, not simply code in a repo.</p>
@@ -439,6 +439,19 @@ Tony Stone
 <li>Check outputs are disposable</li>
 <li>Modular design</li>
 </ul>
+<aside class="notes">
+<p>Moving on to the practical…</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="directory-structure" class="slide level2" data-background-color="#f6e3fd">
 <h2>Directory structure</h2>
@@ -555,7 +568,7 @@ c-&gt;d
 <h2>Preserve input data</h2>
 <ul>
 <li>Input data - the starting point of an analysis - should be read-only</li>
-<li>Data cleaning often incorporates many design decisions and forms part of your analysis</li>
+<li>Data cleaning and re-modelling often incorporates many design decisions and forms part of your analysis</li>
 </ul>
 </section>
 <section id="check-outputs-are-disposable" class="slide level2" data-background-color="#f6e3fd">
@@ -575,7 +588,7 @@ c-&gt;d
 <ul>
 <li><p>Focus on readable, modular code</p></li>
 <li><p>Use <a href="https://best-practice-and-impact.github.io/qa-of-code-guidance/code_documentation.html#docstrings">docstrings</a> for modules, functions, classes, and methods</p></li>
-<li><p>Use with purpose:</p>
+<li><p>Use code comments with purpose:</p>
 <ul>
 <li>For non-obvious details</li>
 <li>How and why code has been written in a particular way</li>
