@@ -51,8 +51,8 @@ and obtain the same results then you are not adding a valuable analysis
 
 With a repeatable, transparent production process we can:
 
-* Focus on verifying that the analysis is sensible (rather than worry about the 
-code)
+* Focus on verifying that the analysis is sensible (rather than worry about whether the 
+code runs)
 * Reuse and build on the methods
 
 Requires good __documentation__, not simply code in a repo.
@@ -112,6 +112,9 @@ __documented__ and tested more easily.
 * Check outputs are disposable
 * Modular design
 
+::: {.notes}
+Moving on to the practical...
+:::
 
 ## Directory structure {background-color="#f6e3fd"}
 
@@ -185,7 +188,7 @@ digraph Dataflow {
 ## Preserve input data {background-color="#f6e3fd"}
 
 * Input data - the starting point of an analysis - should be read-only
-* Data cleaning often incorporates many design decisions and forms part of your 
+* Data cleaning and re-modelling often incorporates many design decisions and forms part of your 
   analysis
 
 
@@ -209,7 +212,7 @@ digraph Dataflow {
 * Use [docstrings](https://best-practice-and-impact.github.io/qa-of-code-guidance/code_documentation.html#docstrings) 
   for modules, functions, classes, and methods
 
-* Use with purpose:
+* Use code comments with purpose:
     * For non-obvious details
     * How and why code has been written in a particular way
     
