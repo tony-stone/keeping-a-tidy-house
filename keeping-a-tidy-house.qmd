@@ -36,7 +36,7 @@ Any guesses for the blank in the picture? Fuzzy, apparently.
 :::
 
 
-## Principles {background-color="#e3fdf6"}
+## Principles (based on Aqua Book){background-color="#e3fdf6"}
 
 * Reproducible
 * Auditable
