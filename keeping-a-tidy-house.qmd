@@ -103,7 +103,7 @@ However, both should adopt a modular design:
 __documented__ and tested more easily.
 
 
-## Structuring your project {background-color="#f6e3fd"}
+## Structuring your project (from Duck Book) {background-color="#f6e3fd"}
 
 * Good directory structure
 * Consistent file and directory name conventions
